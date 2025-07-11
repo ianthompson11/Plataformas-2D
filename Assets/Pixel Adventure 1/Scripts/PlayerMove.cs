@@ -9,8 +9,8 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public Animator animator;
-    public Collider2D attackHitbox; // Referencia al collider del ataque
-    public float attackDamage = 20f; // Daño del ataque
+    public Collider2D attackHitbox;
+    public float attackDamage = 20f;
 
     public float runSpeed = 2f;
     public float jumpSpeed = 5f;
@@ -31,13 +31,19 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         inputActions = new PlayerInputActions();
 
-        // Desactivar el hitbox al inicio
         if (attackHitbox != null)
+        {
             attackHitbox.enabled = false;
+        }
     }
 
     void OnEnable()
     {
+        if (inputActions == null)
+        {
+            inputActions = new PlayerInputActions();
+        }
+
         inputActions.Enable();
 
         inputActions.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -63,16 +69,24 @@ public class PlayerMove : MonoBehaviour
         {
             spriteRenderer.flipX = false;
             attackHitbox.transform.localPosition = new Vector2(0f, 0f);
-
-         
         }
         else if (moveInput.x < -0.01f)
         {
             spriteRenderer.flipX = true;
-            attackHitbox.transform.localPosition = new Vector2(-0.22f, 0f); // izquierda
-            
+            attackHitbox.transform.localPosition = new Vector2(-0.22f, 0f);
         }
 
+        // Animación de caída
+        if (!IsGrounded() && rb.linearVelocity.y < 0)
+        {
+            animator.SetBool("Falling", true);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+
+        // Animación de salto
         if (!IsGrounded())
         {
             animator.SetBool("Jump", true);
@@ -83,6 +97,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Jump", false);
         }
 
+        // Animación de correr
         if (Mathf.Abs(moveInput.x) > 0.01f && IsGrounded())
         {
             animator.SetBool("Run", true);
@@ -92,13 +107,16 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Run", false);
         }
 
+        // Animación de ataque
         animator.SetBool("Attack", isAttackPressed);
 
+        // Salto
         if (isJumpPressed && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
         }
 
+        // Better Jump
         if (betterJump)
         {
             if (rb.linearVelocity.y < 0)
@@ -117,20 +135,22 @@ public class PlayerMove : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
-    // Funciones para eventos de animación
     public void EnableAttackHitbox()
     {
         if (attackHitbox != null)
+        {
             attackHitbox.enabled = true;
+        }
     }
 
     public void DisableAttackHitbox()
     {
         if (attackHitbox != null)
+        {
             attackHitbox.enabled = false;
+        }
     }
 
-    // Detectar colisiones con el hitbox
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy") && attackHitbox.enabled)
@@ -143,4 +163,5 @@ public class PlayerMove : MonoBehaviour
         }
     }
 }
+
 
