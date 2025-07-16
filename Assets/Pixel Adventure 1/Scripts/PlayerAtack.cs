@@ -4,19 +4,20 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
 
-    public void Attack()
+    void Update()
     {
-        if (animator.GetBool("IsAttacking")) return; // Si ya está atacando, no hace nada
-
-        animator.SetBool("IsAttacking", true);
-        animator.SetTrigger("Attack");
-    }
-
-    public void EndAttack()
-    {
-        animator.SetBool("IsAttacking", false);
+        // Si mantienes presionado el clic izquierdo, activa el ataque
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("IsAttacking", false);
+        }
     }
 }
+
 
 
 

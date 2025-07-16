@@ -163,5 +163,8 @@ public class PlayerMove : MonoBehaviour
         }
     }
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8a280ae (Se modifico la funcionalidad del ataque. Inicialmente ocurria un error en el que se mantenia la animacion de ataque detenida si no se dejaba de presionar el mouse. Ahora la animacion se mantiene en un bucle hasta que deje de presionarse. Ademas se agregaron los niveles 1 y 2)
