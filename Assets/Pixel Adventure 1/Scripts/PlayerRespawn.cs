@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,8 +16,11 @@ public class PlayerRespawn : MonoBehaviour
     void Start()
     {
         life = hearts.Length;
+        //Borrar checkpoint para iniciar desde el principio
+        PlayerPrefs.DeleteKey("checkPointPositionX");
+        PlayerPrefs.DeleteKey("checkPointPositionY");
 
-        if (PlayerPrefs.GetFloat("checkPointPositionX") != 0)
+        if (PlayerPrefs.HasKey("checkPointPositionX") && PlayerPrefs.HasKey("checkPointPositionY"))
         {
             transform.position = (new Vector2(PlayerPrefs.GetFloat("checkPointPositionX"), PlayerPrefs.GetFloat("checkPointPositionY")));
         }
@@ -29,21 +32,22 @@ public class PlayerRespawn : MonoBehaviour
     // Unity Message | 0 references
     private void CheckLife()
     {
-        if (life < 1)
+        if (life > 0)
         {
-            Destroy(hearts[0].gameObject);
+            Respawn(); // Vuelve al checkpoint
             animator.Play("Hit");
+            hearts[life].SetActive(false); // Destruye el corazón correspondiente
+
+        }
+        else
+        {
+            // Se quedó sin vidas → borrar checkpoint y reiniciar
+            PlayerPrefs.DeleteKey("checkPointPositionX");
+            PlayerPrefs.DeleteKey("checkPointPositionY");
+
+            // Se quedó sin vidas → reiniciar nivel o Game Over
+            hearts[0].SetActive(false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else if (life < 2)
-        {
-            Destroy(hearts[1].gameObject);
-            animator.Play("Hit");
-        }
-        else if (life < 3)
-        {
-            Destroy(hearts[2].gameObject);
-            animator.Play("Hit");
         }
     }
 
@@ -56,10 +60,33 @@ public class PlayerRespawn : MonoBehaviour
     // 2 references
     public void PlayerDamaged()
     {
-        animator.Play("Hit");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //animator.Play("Hit");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         life--;
         CheckLife();
+
+    }
+
+    private void Respawn()
+    {
+        // Mueve al jugador a la última posición guardada (checkpoint)
+        transform.position = new Vector2(
+            PlayerPrefs.GetFloat("checkPointPositionX"),
+            PlayerPrefs.GetFloat("checkPointPositionY")
+        );
+    }
+    //Sanando al jugador
+    public void HealPlayer()
+    {
+        if (life < hearts.Length)
+        {
+            hearts[life].SetActive(true); // Reactiva el corazón
+            life++;
+        }
+        else
+        {
+            Debug.Log("Vida al máximo, no se puede curar más");
+        }
     }
 }
