@@ -5589,6 +5589,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -1.31
       objectReference: {fileID: 0}
+    - target: {fileID: 7026620842760510274, guid: 4760079cb311f41489e3f980f4c6377a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026620842760510274, guid: 4760079cb311f41489e3f980f4c6377a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026620842760510274, guid: 4760079cb311f41489e3f980f4c6377a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7162081374226037235, guid: 4760079cb311f41489e3f980f4c6377a, type: 3}
       propertyPath: m_Name
       value: MushroomFather
