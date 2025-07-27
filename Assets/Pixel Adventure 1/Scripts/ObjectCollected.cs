@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class ObjectCollected : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision){

@@ -56,6 +56,9 @@ public class PlayerRespawn : MonoBehaviour
     // 2 references
     public void PlayerDamaged()
     {
+        animator.Play("Hit");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         life--;
         CheckLife();
     }

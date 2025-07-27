@@ -9,7 +9,8 @@ public class EnemySpike : MonoBehaviour
             Debug.Log("Player Damaged");
 
             // Destruye el objeto del jugador
-            Destroy(collision.gameObject);
+           collision.transform.GetComponent<PlayerRespawn>().PlayerDamaged();
+
         }
     }
 }

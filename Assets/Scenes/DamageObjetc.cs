@@ -11,7 +11,8 @@ public class DamageObject : MonoBehaviour
             // Si solo quieres destruir este objeto (el que tiene este script)
             // Usa Destroy(gameObject);
             // Si realmente deseas destruir el jugador:
-            Destroy(collision.gameObject);
+          collision.transform.GetComponent<PlayerRespawn>().PlayerDamaged();
+
         }
     }
 }
