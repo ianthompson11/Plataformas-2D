@@ -8071,11 +8071,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6868793174911751755, guid: d3404fe8ccc8ee041ab41b5f406061cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2207259
+      value: -2.57
       objectReference: {fileID: 0}
     - target: {fileID: 6868793174911751755, guid: d3404fe8ccc8ee041ab41b5f406061cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48963767
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 6868793174911751755, guid: d3404fe8ccc8ee041ab41b5f406061cf, type: 3}
       propertyPath: m_LocalPosition.z
