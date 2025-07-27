@@ -11,6 +11,7 @@ public class CoinsManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Monedas y esmeraldas restantes: " + transform.childCount);
         AllCoinsCollected();
     }
 
