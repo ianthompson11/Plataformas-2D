@@ -1,16 +1,27 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro; // ← CAMBIO: usar TextMeshPro
 public class CoinsManager : MonoBehaviour
 {
     public GameObject levelCleared;  // Imagen o panel de victoria (UI)
     public GameObject transition;    // Imagen/panel de transición (UI)
     public GameObject hudCanvas;     // (Opcional) El HUD que quieres ocultar al ganar
 
+    public TMP_Text totalCoins; // ← CAMBIO aquí
+    public TMP_Text CoinsCollected; // ← CAMBIO aquí
+
+    private int totalCoinsInLevel;
+
+    private void Start()
+    {
+        totalCoinsInLevel = transform.childCount;
+    }
     private void Update()
     {
         Debug.Log("Monedas y esmeraldas restantes: " + transform.childCount);
         AllCoinsCollected();
+        totalCoins.text = totalCoinsInLevel.ToString();
+        CoinsCollected.text=transform.childCount.ToString();
     }
 
     public void AllCoinsCollected()
