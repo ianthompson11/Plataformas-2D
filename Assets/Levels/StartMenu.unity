@@ -1452,9 +1452,21 @@ PrefabInstance:
       propertyPath: creditsPanel
       value: 
       objectReference: {fileID: 22329864}
+    - target: {fileID: 1238487559317594693, guid: 41159dd0245535b44a272bf5c26cede6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 203.8097
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238487559317594693, guid: 41159dd0245535b44a272bf5c26cede6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 66.2159
+      objectReference: {fileID: 0}
     - target: {fileID: 2120485511124114457, guid: 41159dd0245535b44a272bf5c26cede6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364670644548451145, guid: 41159dd0245535b44a272bf5c26cede6, type: 3}
+      propertyPath: m_text
+      value: Salir
       objectReference: {fileID: 0}
     - target: {fileID: 3489159713415530758, guid: 41159dd0245535b44a272bf5c26cede6, type: 3}
       propertyPath: m_text
